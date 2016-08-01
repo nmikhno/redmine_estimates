@@ -1,0 +1,100 @@
+<% content_for :header_tags do %>
+    <%= javascript_include_tag "plugin.js", :plugin => 'estimates' %>
+<% end %>
+
+
+
+<p><strong><%= "Оценки по задаче" %></strong></p>
+<div class="autoscroll">
+	<table id="estimate-entries" class="list time-entries">
+		
+		<thead>
+			<tr>
+    <th class="checkbox hide-when-print">
+      <%= link_to image_tag('toggle_check.png'),
+        {},
+        :onclick => 'toggleIssuesSelection(this); return false;',
+        :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+    </th>
+				
+				
+				<th><a href="/issues/1/estimate_entries?sort=spent_on" class="sort desc">Date</a></th>
+				<th ><a href="/issues/1/estimate_entries?sort=user%2Cspent_on%3Adesc">User</a></th>
+				<th ><a href="/issues/1/estimate_entries?sort=activity,spent_on:desc">Activity</a></th>
+				<th>Hours</th>
+				<th>Comment</th>
+				
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<style type="text/css">
+			
+	/*			tbody > .time-entry:not(.hidden):nth-child(odd){
+					background-color: #f6f7f8;
+				}
+				tbody > .time-entry:not(.hidden):nth-child(even){
+					background-color: #fff;					
+				}*/
+				.hidden{
+					display: none;
+				}
+
+
+			</style>
+
+			<script type="text/javascript">
+			
+			</script>
+			<% @estimates.each do |entry| -%>
+			
+			<tr class="time-entry " 
+				data-is-accepted="<%= entry.is_accepted %>" >
+
+			<%= labelled_form_for entry,  :url => issue_estimate_entry_path(entry.issue_id, entry.id) do -%>
+
+			<%= hidden_field_tag 'back_url', url_for(params) %>
+
+				<td>
+					<%= check_box_tag("ids[]", entry.id, false, :id => nil) %>
+				</td>
+			
+				<td>
+					<%= entry.spent_on %>
+				</td>
+				<td>
+					<%= User.find(entry.user_id ).name %>
+				</td>
+				<td>
+					<%= Enumeration.find(entry.activity_id).name %>
+				</td>
+				<td>
+					<%= entry.hours %>
+				</td>
+				<td>
+					<%= entry.comments %>
+				</td>
+				<td>
+				<input id="estimate_entry_hours" type="hidden" name="estimate_entry[is_accepted]"  size="6" type="text" value=1 >
+					 <% if entry.editable_by?(User.current) -%> 
+					 <%= button_tag 'Подтвердить', :style => "background-color: #57a957; border-radius: 5px; color: white" %> 
+				        <%= link_to image_tag('edit.png'),  edit_estimate_entry_path(entry),
+				                                           :title => l(:button_edit) %>
+				        <%= link_to image_tag('delete.png'), estimate_entry_path(entry),
+				                                             :data => {:confirm => l(:text_are_you_sure)},
+				                                             :method => :delete,
+				                                             :title => l(:button_delete) %>
+    				<% end -%>
+				</td>
+				<% end %>
+			
+			</tr>
+			<% end -%>
+		</tbody>
+	</table>
+	
+</div>
+<input type="checkbox" name="show_accepted" id="accepted_estimates">
+<label for="accepted_estimates"> <span style="text-decoration: underline">Показать подтвержденные оценки</span></label> 
+
+<%= link_to image_tag('estimate_clock_icon.png', :plugin => 'estimates') + "Добавить оценку", new_issue_estimate_entry_path(@issue)  %>

@@ -1,0 +1,1 @@
+project_id:integer user_id:integer issue_id:integer hours:float comments:string activity_id:integer spent_on:date tyear:integer tmonth:integer tweek:integer created_on:datetime updated_on:datetime1
