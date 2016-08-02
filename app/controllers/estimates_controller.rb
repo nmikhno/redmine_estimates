@@ -35,7 +35,7 @@ class EstimatesController < ApplicationController
 
   def authorize_global
     find_optional_project
-    if !User.current.allowed_to?(:view_estimates, @project)
+    if !User.current.allowed_to_globally?(:view_estimates) 
       render_403
     end
   end
