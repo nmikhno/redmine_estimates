@@ -31,4 +31,3 @@
       get 'report', :on => :collection
     end
   end
-
