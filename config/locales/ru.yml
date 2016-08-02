@@ -2,3 +2,4 @@ ru:
   button_issue_estimate: "Оценка задачи"
   label_estimate_time: "Всего оценок"
   label_estimate_accepted_time: "Подтвержденных оценок"
+  label_estimates_actions: "Действия с оценками"

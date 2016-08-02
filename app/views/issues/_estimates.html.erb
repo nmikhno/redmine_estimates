@@ -24,6 +24,7 @@
 				<th>Hours</th>
 				<th>Comment</th>
 				
+				<th><%= l(:label_estimates_actions) %></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -66,15 +67,23 @@
 				</td>
 				<td>
 				<input id="estimate_entry_hours" type="hidden" name="estimate_entry[is_accepted]"  size="6" type="text" value=1 >
-					 <% if entry.editable_by?(User.current) -%> 
+					 <% if entry.editable_by?(User.current)  -%>
+					 <% entry.created_on.utc  > (Time.now - 60.seconds).utc -%>
+
+
 					 <%= button_tag 'Подтвердить', :style => "background-color: #57a957; border-radius: 5px; color: white" %> 
+
+    				<% end -%>
+				</td>
+				<td>
+					<% if entry.created_on.utc  > (Time.now - 60.seconds).utc %>
 				        <%= link_to image_tag('edit.png'),  edit_estimate_entry_path(entry),
 				                                           :title => l(:button_edit) %>
 				        <%= link_to image_tag('delete.png'), estimate_entry_path(entry),
 				                                             :data => {:confirm => l(:text_are_you_sure)},
 				                                             :method => :delete,
 				                                             :title => l(:button_delete) %>
-    				<% end -%>
+				      	<% end %>
 				</td>
 				<% end %>
 			

@@ -3,3 +3,4 @@ en:
   button_issue_estimate: "Оценка задачи"
   label_estimate_time: "Total estimates"
   label_estimate_accepted_time: "Accepted estimates"
+  label_estimates_actions: "Actions for estimates"
