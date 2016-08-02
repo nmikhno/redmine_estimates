@@ -68,10 +68,12 @@
 				<td>
 				<input id="estimate_entry_hours" type="hidden" name="estimate_entry[is_accepted]"  size="6" type="text" value=1 >
 					 <% if entry.editable_by?(User.current)  -%>
-					 <% entry.created_on.utc  > (Time.now - 60.seconds).utc -%>
 
-
-					 <%= button_tag 'Подтвердить', :style => "background-color: #57a957; border-radius: 5px; color: white" %> 
+						 <% if !entry.is_accepted  -%>
+						 	<%= button_tag 'Подтвердить', :style => "background-color: #57a957; border-radius: 5px; color: white" %> 
+						<% else %>
+						<span style="color:#808080">Подтвержено</span>						 	
+						 <% end %>
 
     				<% end -%>
 				</td>
