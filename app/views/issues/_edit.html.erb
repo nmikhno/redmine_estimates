@@ -1,30 +1,3 @@
-<%= labelled_form_for @time_entry, :url => issue_estimate_entries_path(@issue.id, @time_entry) do |f| %>
-    <% if User.current.allowed_to?(:view_estimates, @project) %>
-        <fieldset class="tabular"><legend><%= l(:button_issue_estimate) %></legend>
-        
-        
-        <%= labelled_fields_for :estimate_entry, @time_entry do |time_entry| %>
-        <div class="splitcontentleft">
-        <p><%= time_entry.text_field :hours, :size => 6, :label => :label_spent_time %> <%= l(:field_hours) %></p>
-        </div>
-        <div class="splitcontentright">
-        <p><%= time_entry.select :activity_id, activity_collection_for_select_options %></p>
-        <p>
-            <%= submit_tag l(:button_submit) %>
-        </p> 
-        </div>
-        <p><%= time_entry.text_field :comments, :size => 60 %></p>
-        <% @time_entry.custom_field_values.each do |value| %>
-          <%= custom_field_tag_with_label :estimate_entry, value %>     
-        <% end %>
-            
-        <% end %>
-    </fieldset>
-    <%= hidden_field_tag 'last_journal_id', params[:last_journal_id] || @issue.last_journal_id %>
-    
-    <% end %>
-<% end %>
-
 <%= labelled_form_for @issue, :html => {:id => 'issue-form', :multipart => true} do |f| %>
     <%= error_messages_for 'issue', 'time_entry', 'estimate_entry' %>
     <%= render :partial => 'conflict' if @conflict %>
@@ -36,7 +9,21 @@
         </div>
         </fieldset>
     <% end %>
+    <%= labelled_fields_for :estimate_entry, @estimate_entry do |estimates_entry| %>
+        <fieldset class="tabular"><legend><%= l(:button_issue_estimate) %></legend>
 
+            <div class="splitcontentleft">
+                <p><%= estimates_entry.text_field :hours, :size => 6, :label => :label_spent_time %> <%= l(:field_hours) %></p>
+            </div>
+            <div class="splitcontentleft">
+                <p><%= estimates_entry.select :activity_id, activity_collection_for_select_options %></p>
+            </div>
+
+            <p><%= estimates_entry.text_field :comments, :size => 60, :style => 'width: 90%' %></p>
+
+        </fieldset>
+
+    <% end %>
     <% if User.current.allowed_to?(:log_time, @project) %>
         <fieldset class="tabular"><legend><%= l(:button_log_time) %></legend>
         <%= labelled_fields_for :time_entry, @time_entry do |time_entry| %>
