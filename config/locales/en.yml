@@ -1,7 +1,5 @@
 # English strings go here for Rails i18n
 en:
-  # my_label: "My label"
   button_issue_estimate: "Оценка задачи"
-ru:
-  # my_label: "My label"
-  button_issue_estimate: "Оценка задачи"
+  label_estimate_time: "Total estimates"
+  label_estimate_accepted_time: "Accepted estimates"
