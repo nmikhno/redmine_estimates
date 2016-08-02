@@ -63,8 +63,16 @@
   if User.current.allowed_to?(:view_time_entries, @project)
     rows.right l(:label_spent_time), (@issue.total_spent_hours > 0 ? link_to(l_hours(@issue.total_spent_hours), issue_time_entries_path(@issue)) : "-"), :class => 'spent-time'
   end
+
+  if User.current.allowed_to?(:view_time_entries, @project)
+    rows.right l(:label_estimate_time), (@issue.total_estimate_hours > 0 ? link_to(l_hours(@issue.total_estimate_hours), issue_estimate_entries_path(@issue)) : "-"), :class => 'spent-time'
+    rows.right l(:label_estimate_accepted_time), (@issue.total_accepted_estimate_hours > 0 ? l_hours(@issue.total_accepted_estimate_hours) : "-"), :class => 'spent-time'
+  end
 end %>
+
 <%= render_custom_fields_rows(@issue) %>
+
+
 <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
 </table>
 
