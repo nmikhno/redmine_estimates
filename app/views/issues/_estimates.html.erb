@@ -10,12 +10,7 @@
 		
 		<thead>
 			<tr>
-    <th class="checkbox hide-when-print">
-      <%= link_to image_tag('toggle_check.png'),
-        {},
-        :onclick => 'toggleIssuesSelection(this); return false;',
-        :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
-    </th>
+   
 				
 				
 				<th><a href="/issues/1/estimate_entries?sort=spent_on" class="sort desc">Date</a></th>
@@ -46,10 +41,6 @@
 
 			<%= hidden_field_tag 'back_url', url_for(params) %>
 
-				<td>
-					<%= check_box_tag("ids[]", entry.id, false, :id => nil) %>
-				</td>
-			
 				<td>
 					<%= entry.spent_on %>
 				</td>
