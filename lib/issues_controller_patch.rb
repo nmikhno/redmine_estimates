@@ -56,7 +56,7 @@ module IssuesControllerPatch
           @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
           saved = false
           begin
-            saved = save_issue_with_child_records
+            saved = save_issue_with_child_records_private
           rescue ActiveRecord::StaleObjectError
             @conflict = true
             if params[:last_journal_id]
@@ -86,6 +86,9 @@ module IssuesControllerPatch
           @time_entry = TimeEntry.new(:issue => @issue, :project => @issue.project)
           @time_entry.attributes = params[:time_entry]
 
+          @estimate_entry = EstimateEntry.new(:issue => @issue, :project => @issue.project)
+          @estimate_entry.attributes = params[:estimate_entry]
+
           @issue.init_journal(User.current)
 
           issue_attributes = params[:issue]
@@ -105,6 +108,27 @@ module IssuesControllerPatch
           @priorities = IssuePriority.active
           @allowed_statuses = @issue.new_statuses_allowed_to(User.current)
           true
+        end
+
+        def save_issue_with_child_records_private
+          Issue.transaction do
+            if params[:time_entry] && (params[:time_entry][:hours].present? || params[:time_entry][:comments].present?) && User.current.allowed_to?(:log_time, @issue.project)
+              time_entry = @time_entry || TimeEntry.new
+              time_entry.project = @issue.project
+              time_entry.issue = @issue
+              time_entry.user = User.current
+              time_entry.spent_on = User.current.today
+              time_entry.attributes = params[:time_entry]
+              @issue.time_entries << time_entry
+            end
+
+            call_hook(:controller_issues_edit_before_save, { :params => params, :issue => @issue, :time_entry => time_entry, :journal => @issue.current_journal})
+            if @issue.save
+              call_hook(:controller_issues_edit_after_save, { :params => params, :issue => @issue, :time_entry => time_entry, :journal => @issue.current_journal})
+            else
+              raise ActiveRecord::Rollback
+            end
+          end
         end
     end
 end
