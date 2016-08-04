@@ -122,6 +122,16 @@ module IssuesControllerPatch
               @issue.time_entries << time_entry
             end
 
+            if params[:estimate_entry] && (params[:estimate_entry][:hours].present? || params[:estimate_entry][:comments].present?) && User.current.allowed_to?(:log_time, @issue.project)
+              estimate_entry = @estimate_entry || EstimateEntry.new
+              estimate_entry.project = @issue.project
+              estimate_entry.issue = @issue
+              estimate_entry.user = User.current
+              estimate_entry.spent_on = User.current.today
+              estimate_entry.attributes = params[:estimate_entry]
+              @issue.estimate_entries << estimate_entry
+            end
+
             call_hook(:controller_issues_edit_before_save, { :params => params, :issue => @issue, :time_entry => time_entry, :journal => @issue.current_journal})
             if @issue.save
               call_hook(:controller_issues_edit_after_save, { :params => params, :issue => @issue, :time_entry => time_entry, :journal => @issue.current_journal})
