@@ -11,3 +11,4 @@ ru:
   label_estimation_is_accepted: "Подтверждено"
   link_show_accepted_estimates: "Показать подтвержденные оценки"
   label_add_estimate: "Добавить оценку"
+  estimate_entries: "Оценка"
