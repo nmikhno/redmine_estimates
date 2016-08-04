@@ -7,17 +7,15 @@ module IssuesControllerPatch
     base.class_eval do
        unloadable
        alias_method_chain :show, :patch # modify some_method method by adding your_action action
+       alias_method_chain :update, :patch
     end
   end
 
     module InstanceMethods
 
-        # modified some_method
-        # You can call original method before or after
-        # even in the middle of your actions
-        # or not to call to all
+        
         def show_with_patch # modified some_method
-          # puts "SHOW METHOD IS ABOUT TO OVERRIDE..."
+          
           @estimates = EstimateEntryQuery.build_from_params(params, :project => @project, :name => '_').results_scope(:order => "#{EstimateEntry.table_name}.id ASC").on_issue(@issue)
           @estimates_report = Redmine::Helpers::TimeReport.new(@project, @issue, params[:criteria], params[:columns], @estimates)
 
@@ -51,7 +49,62 @@ module IssuesControllerPatch
               send_data(pdf, :type => 'application/pdf', :filename => "#{@project.identifier}-#{@issue.id}.pdf")
             }
           end
-          
+        end
+
+        def update_with_patch
+          return unless update_issue_from_params_private
+          @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
+          saved = false
+          begin
+            saved = save_issue_with_child_records
+          rescue ActiveRecord::StaleObjectError
+            @conflict = true
+            if params[:last_journal_id]
+              @conflict_journals = @issue.journals_after(params[:last_journal_id]).all
+              @conflict_journals.reject!(&:private_notes?) unless User.current.allowed_to?(:view_private_notes, @issue.project)
+            end
+          end
+
+          if saved
+            render_attachment_warning_if_needed(@issue)
+            flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
+
+            respond_to do |format|
+              format.html { redirect_back_or_default issue_path(@issue) }
+              format.api  { render_api_ok }
+            end
+          else
+            respond_to do |format|
+              format.html { render :action => 'edit' }
+              format.api  { render_validation_errors(@issue) }
+            end
+          end
+        end
+
+        def update_issue_from_params_private
+          @edit_allowed = User.current.allowed_to?(:edit_issues, @project)
+          @time_entry = TimeEntry.new(:issue => @issue, :project => @issue.project)
+          @time_entry.attributes = params[:time_entry]
+
+          @issue.init_journal(User.current)
+
+          issue_attributes = params[:issue]
+          if issue_attributes && params[:conflict_resolution]
+            case params[:conflict_resolution]
+            when 'overwrite'
+              issue_attributes = issue_attributes.dup
+              issue_attributes.delete(:lock_version)
+            when 'add_notes'
+              issue_attributes = issue_attributes.slice(:notes)
+            when 'cancel'
+              redirect_to issue_path(@issue)
+              return false
+            end
+          end
+          @issue.safe_attributes = issue_attributes
+          @priorities = IssuePriority.active
+          @allowed_statuses = @issue.new_statuses_allowed_to(User.current)
+          true
         end
     end
 end
