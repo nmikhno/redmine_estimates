@@ -10,10 +10,10 @@
         </fieldset>
     <% end %>
     <%= labelled_fields_for :estimate_entry, @estimate_entry do |estimates_entry| %>
-        <fieldset class="tabular"><legend><%= l(:button_issue_estimate) %></legend>
+        <fieldset class="tabular"><legend><%= l(:label_estimated_time) %></legend>
 
             <div class="splitcontentleft">
-                <p><%= estimates_entry.text_field :hours, :size => 6, :label => :label_spent_time %> <%= l(:field_hours) %></p>
+                <p><%= estimates_entry.text_field :hours, :size => 6, :label => :label_estimate %> <%= l(:field_hours) %></p>
             </div>
             <div class="splitcontentleft">
                 <p><%= estimates_entry.select :activity_id, activity_collection_for_select_options %></p>
