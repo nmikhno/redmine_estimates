@@ -14,15 +14,17 @@
   # TODO: delete /estimate_entries for bulk deletion
   match '/estimate_entries/destroy', :to => 'estimates#destroy', :via => :delete
   # match '/issues/:issue_id/estimate_entries', :to => 'estimates#create', :via => :post, :issue_id => /\d+/
-
-	resources :issues do
+  # match '/issues/:issue_id/estimate_entries/:id', :to => 'estimates#accept', :via => :post, :issue_id => /\d+/, :id => /\d+/
+	
+  resources :issues do
 		resources :estimate_entries, :controller => 'estimates' do
 		  collection do
 		    get 'report'
-        # get 'new'
         post 'new'
-        
 		  end
+      
+      put :accept, on: :member
+
 		end
 	end
 

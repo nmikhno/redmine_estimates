@@ -3,7 +3,7 @@ class EstimatesController < ApplicationController
   menu_item :estimates
 
   before_filter :find_optional_project, :only => [:new, :create, :index, :report]
-  before_filter :find_estimate_entry, :only => [:show, :edit, :update]
+  before_filter :find_estimate_entry, :only => [:show, :edit, :update, :accept]
   before_filter :find_estimate_entries, :only => [:bulk_edit, :bulk_update, :destroy]
 
   before_filter :authorize, :only => [:show, :edit, :update, :bulk_edit, :bulk_update, :destroy]
@@ -151,13 +151,7 @@ class EstimatesController < ApplicationController
   end
 
   def update
-    @time_entry.safe_attributes = params[:estimate_entry]
-    
-    is_accepted = params[:estimate_entry][:is_accepted]
-    
-    if is_accepted
-      @time_entry.is_accepted =  is_accepted
-    end
+
     
     # call_hook(:controller_timelog_edit_before_save, { :params => params, :estimate_entry => @time_entry })
 
@@ -175,6 +169,19 @@ class EstimatesController < ApplicationController
         format.api  { render_validation_errors(@time_entry) }
       end
     end
+  end
+
+  def accept 
+    @time_entry.safe_attributes = params[:estimate_entry]
+    
+    is_accepted = params[:estimate_entry][:is_accepted]
+    
+    if is_accepted
+      @time_entry.is_accepted =  is_accepted
+    end
+
+    update
+
   end
   
   def bulk_edit
