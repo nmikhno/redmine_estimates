@@ -22,7 +22,7 @@
     <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", entry.id, false, :id => nil) %></td>
     <%= raw @query.inline_columns.map {|column| "<td class=\"#{column.css_classes}\">#{column_content(column, entry)}</td>"}.join %>
     <td class="buttons">
-    <% if entry.editable_by?(User.current) -%>
+    <% if User.current.allowed_to?(:edit_estimates, @project) -%>
         <%= link_to image_tag('edit.png'),  edit_estimate_entry_path(entry),
                                            :title => l(:button_edit) %>
         <%= link_to image_tag('delete.png'), estimate_entry_path(entry),
