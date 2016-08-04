@@ -37,7 +37,7 @@
 			<tr class="time-entry " 
 				data-is-accepted="<%= entry.is_accepted %>" >
 
-			<%= labelled_form_for entry,  :url => issue_estimate_entry_path(entry.issue_id, entry.id) do -%>
+			<%= labelled_form_for entry,  :url => accept_issue_estimate_entry_path(entry.issue_id, entry.id) do -%>
 
 			<%= hidden_field_tag 'back_url', url_for(params) %>
 
@@ -55,15 +55,16 @@
 				</td>
 				<td>
 					<%= entry.comments %>
+					<% p "user is admin #{User.current.admin?}" %>
 				</td>
 				<td>
-					 <% if entry.editable_by?(User.current)  -%>
+					 <% if (entry.editable_by?(User.current)) || User.current.admin?  -%>
 						 <% if !entry.is_accepted  -%>
 							<input id="estimate_entry_hours" type="hidden" name="estimate_entry[is_accepted]"  size="6" type="text" value=1 >
 						 	<%= button_tag 'Подтвердить', :style => "background-color: #57a957; border-radius: 5px; color: white" %> 
-						<% elsif entry.created_on.utc  > (Time.now - 60.seconds).utc %>
+						
+						<% elsif (entry.created_on.utc  > (Time.now - 60.seconds).utc) || User.current.admin?  %>
 							<input id="estimate_entry_hours" type="hidden" name="estimate_entry[is_accepted]"  size="6" type="text" value=0 >
-
 						 	<%= button_tag 'Отменить', :style => "background-color: #e37d7d; border-radius: 5px; color: white" %> 
 
 						<% else %>

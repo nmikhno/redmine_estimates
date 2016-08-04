@@ -23,6 +23,7 @@ Redmine::Plugin.register :estimates do
 
   project_module :estimates do
     permission :view_estimates, {:estimates => [:new, :create, :index, :report]}, :public => true
-    permission :edit_estimates, {:estimate_entries => [:edit, :update, :destroy]}
+    permission :edit_estimates, {:estimate_entries => [:edit, :update, :destroy, :accept]}
+    permission :accept_estimates, {:estimates => :accept}
   end
 end
