@@ -10,13 +10,14 @@
 		
 		<thead>
 			<tr>
-				<th><a href="/issues/1/estimate_entries?sort=spent_on" class="sort desc"><%= l(:label_date) %></a></th>
-				<th ><a href="/issues/1/estimate_entries?sort=user%2Cspent_on%3Adesc"><%= l(:field_user) %></a></th>
-				<th ><a href="/issues/1/estimate_entries?sort=activity,spent_on:desc"><%= l(:field_activity) %></a></th>
-				<th><%= l(:label_estimate) %></th>
+				<th><a href= <%= issue_estimate_entries_path(@issue.id) + "?sort=spent_on" %> class="sort desc"><%= l(:label_date) %></a></th>
+				<th><a href= <%= issue_estimate_entries_path(@issue.id) + "?sort=user%2Cspent_on%3Adesc" %> ><%= l(:field_user) %></a></th> 
+				<th><a href= <%= issue_estimate_entries_path(@issue.id) + "?sort=activity,spent_on:desc" %> ><%= l(:field_activity) %></a></th>
+				<th><a href= <%= issue_estimate_entries_path(@issue.id) + "?sort=hours%2Cspent_on"%> ><%= l(:label_estimate) %></a></th>
 				<th><%= l(:field_comments) %></th>
 				<th><%= l(:label_estimates_actions) %></th>
 				<th></th>
+
 			</tr>
 		</thead>
 		<tbody>
