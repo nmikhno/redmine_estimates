@@ -5,6 +5,7 @@ ru:
   label_estimates_actions: "Действия с оценками"
   label_estimated_time: "Оценка времени выполнения"
   label_issue_estimates: "Оценки по задаче"
+  label_issues_estimates: "Оценки по задачам"
   label_estimate: "Оценка"
   button_accept: "Подтвердить"
   button_cancel_estimate: "Отклонить"

@@ -6,6 +6,7 @@ en:
   label_estimates_actions: "Actions for estimates"
   label_estimated_time: "Estimated time"
   label_issue_estimates: "Estimates on current issue"
+  label_issues_estimates: "All estimates"
   label_estimate: "Estimation"
   button_accept: "Accept"
   button_cancel_estimate: "Reject"
