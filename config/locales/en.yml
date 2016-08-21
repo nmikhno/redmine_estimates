@@ -14,3 +14,5 @@ en:
   link_show_accepted_estimates: "Show accepted estimates"
   label_add_estimate: "Add estimate"
   estimate_entries: "Estimation"
+  field_total_estimate_hours: "Total estimated hours"
+  field_total_accepted_estimate_hours: "Total accepted estimated hours"

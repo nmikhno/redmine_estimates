@@ -13,3 +13,5 @@ ru:
   link_show_accepted_estimates: "Показать подтвержденные оценки"
   label_add_estimate: "Добавить оценку"
   estimate_entries: "Оценка"
+  field_total_estimate_hours: "Всего часов оценок"
+  field_total_accepted_estimate_hours: "Подтверждено часов оценок"
