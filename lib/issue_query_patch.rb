@@ -9,8 +9,8 @@ module IssueQueryPatch
       alias_method_chain :initialize_available_filters, :patch
       
       self.available_columns.concat([
-		QueryColumn.new(:total_estimate_hours, :sortable => "#{EstimateEntry.table_name}.is_accepted ", :groupable => true),
-        QueryColumn.new(:total_accepted_estimate_hours, :sortable => "#{EstimateEntry.table_name}.is_accepted ", :groupable => true)
+		QueryColumn.new(:total_estimate_hours, :sortable => "COALESCE((SELECT SUM(hours) FROM #{EstimateEntry.table_name} WHERE #{EstimateEntry.table_name}.issue_id = #{Issue.table_name}.id), 0)"),
+        QueryColumn.new(:total_accepted_estimate_hours, :sortable => "COALESCE((SELECT SUM(hours) FROM #{EstimateEntry.table_name} WHERE #{EstimateEntry.table_name}.issue_id = #{Issue.table_name}.id), 0)")
       ])
     end
   end

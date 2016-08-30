@@ -6,7 +6,8 @@ module IssueModelPatch
 
 	    base.class_eval do
 	       unloadable
-  		   has_many :estimate_entries, :dependent => :destroy
+  		   has_many :estimate_entries, :dependent => :destroy, 
+  		   :class_name => 'EstimateEntry'
 
 	  	end
 	end
