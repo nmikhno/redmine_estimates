@@ -151,8 +151,8 @@ class EstimatesController < ApplicationController
   end
 
   def update
+    @time_entry.safe_attributes = params[:estimate_entry]
 
-    
     # call_hook(:controller_timelog_edit_before_save, { :params => params, :estimate_entry => @time_entry })
 
     if @time_entry.save
@@ -293,6 +293,8 @@ class EstimatesController < ApplicationController
       @project = @issue.project
     elsif !params[:project_id].blank?
       @project = Project.find(params[:project_id])
+    elsif !params[:id].blank?
+      @project = EstimateEntry.find(params[:id]).project
     end
   end
 
