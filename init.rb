@@ -21,7 +21,7 @@ Redmine::Plugin.register :redmine_estimates do
   description 'This is Redmine plugin for multiple estimate entries for a single task'
   version '0.9'
   url 'http://evergreen.team'
-  author_url 'http://evergreen.team'
+  author_url 'https://ua.linkedin.com/in/nick-mikhno-b3462b74'
 
   permission :view_estimates, {:estimates => [:new, :create, :index, :report]}, :public => true
   permission :edit_estimates, {:estimates => [:edit, :update, :destroy, :accept]}
