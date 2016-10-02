@@ -175,7 +175,7 @@ module IssueQueryPatch
         @available_columns.insert index, QueryColumn.new(:total_estimate_hours,
                                                          :sortable => "COALESCE((SELECT SUM(hours) FROM #{EstimateEntry.table_name} WHERE #{EstimateEntry.table_name}.issue_id = #{Issue.table_name}.id), 0)",
                                                          :default_order => 'desc',
-                                                         :caption => :label_spent_time
+                                                         :caption => :field_total_estimate_hours
         )
         p 'init available col'
 
