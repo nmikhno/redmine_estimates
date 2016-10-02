@@ -40,4 +40,5 @@ Check out some permission for user's roles.
 ![issue_view](https://sc-cdn.scaleengine.net/i/c97cfe6ea43807d2bf3fb560cc1e38ce.png "User permissions")
 
 View issues report with total estimates and total accepted estimates hours
-![issue_view](https://sc-cdn.scaleengine.net/i/1cd2ee75720ab4f2b6f536d5152061bc.png "Issue reports with estimates")
+
+![issue_view](https://sc-cdn.scaleengine.net/i/ee6dbc64144aed5f4e42d77ef38a6c44.png "Issue reports with estimates")
