@@ -177,7 +177,6 @@ module IssueQueryPatch
                                                          :default_order => 'desc',
                                                          :caption => :field_total_estimate_hours
         )
-        p 'init available col'
 
       end
 
