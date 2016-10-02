@@ -1,5 +1,5 @@
 <% content_for :header_tags do %>
-    <%= javascript_include_tag "plugin.js", :plugin => 'estimates' %>
+		<%= javascript_include_tag "plugin.js", :plugin => 'redmine_estimates' %>
 <% end %>
 
 
@@ -88,6 +88,6 @@
 	
 </div>
 <input type="checkbox" name="show_accepted" id="accepted_estimates">
-<label for="accepted_estimates"> <span style="text-decoration: underline"><%= l(:link_show_accepted_estimates) %></span></label> 
+<label for="accepted_estimates"> <span style="text-decoration: underline"><%= l(:link_show_accepted_estimates) %></span></label>
 
-<%= link_to image_tag('estimate_clock_icon.png', :plugin => 'estimates') + l(:label_add_estimate), new_issue_estimate_entry_path(@issue)  %>
+<%= link_to image_tag('estimate_clock_icon.png', :plugin => 'redmine_estimates') + l(:label_add_estimate), new_issue_estimate_entry_path(@issue) %>
