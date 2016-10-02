@@ -28,13 +28,13 @@ This is Redmine plugin for multiple estimates entries for a single task
 
 3. Restart Redmine
 
-You should now be able to see the plugin list in Administration -> Plugins and configure the newly installed plugin (if the plugin requires to be configured).
+You should now be able to see the plugin list in Administration -> Plugins and configure the newly installed plugin.
 
-Now you shold be able to add and manage issues estimates
+Now you shold be able to add and manage issues estimates.
 
 
 ![issue_view](https://sc-cdn.scaleengine.net/i/9ab4f1fd2e693ea440eed4a9ab54124a.png "Issue view")
 
-Check out some permission for user's roles 
+Check out some permission for user's roles.
 
 ![issue_view](https://sc-cdn.scaleengine.net/i/c97cfe6ea43807d2bf3fb560cc1e38ce.png "User permissions")
