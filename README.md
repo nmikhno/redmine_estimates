@@ -37,7 +37,7 @@ Now you shold be able to add and manage issues estimates.
 
 Check out some permission for user's roles.
 
-![issue_view](https://sc-cdn.scaleengine.net/i/c97cfe6ea43807d2bf3fb560cc1e38ce.png "User permissions")
+![issue_view](https://sc-cdn.scaleengine.net/i/154125d7a239cf41d9f8134b9c972bf4.png "User permissions")
 
 View issues report with total estimates and total accepted estimates hours
 
