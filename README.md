@@ -35,6 +35,8 @@ Now you shold be able to add and manage issues estimates.
 
 ![issue_view](https://sc-cdn.scaleengine.net/i/9ab4f1fd2e693ea440eed4a9ab54124a.png "Issue view")
 
+![issue_view](https://sc-cdn.scaleengine.net/i/a3c7276e23d226061c5eff4aaaca9ffb.png "Issue view")
+
 Check out some permission for user's roles.
 
 ![issue_view](https://sc-cdn.scaleengine.net/i/154125d7a239cf41d9f8134b9c972bf4.png "User permissions")
