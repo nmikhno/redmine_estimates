@@ -1,6 +1,6 @@
 # Redmine Estimates Plugin
 
-This is Redmine plugin for multiple estimates entries for a single task
+This is Redmine plugin for multiple estimate entries for a single task
 
 ## Installing a plugin
 

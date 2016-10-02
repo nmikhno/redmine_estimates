@@ -18,7 +18,7 @@ end
 Redmine::Plugin.register :redmine_estimates do
   name 'Estimates plugin'
   author 'Nick Mikhno'
-  description 'This is Redmine plugin for multiple estimates entries for a single task'
+  description 'This is Redmine plugin for multiple estimate entries for a single task'
   version '0.9'
   url 'http://evergreen.team'
   author_url 'http://evergreen.team'
