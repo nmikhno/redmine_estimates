@@ -115,10 +115,13 @@ end %>
 <%= render :partial => 'relations' %>
 </div>
 <% end %>
-<div id="relations">
-  <hr />
-  <%= render :partial => 'estimates' %>
-</div>
+
+<% if @estimates.present? %>
+  <div id="relations">
+    <hr />
+    <%= render :partial => 'estimates' %>
+  </div>
+<% end %>
 
 <% if @changesets.present? %>
     <div id="issue-changesets">
