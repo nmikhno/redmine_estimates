@@ -13,7 +13,7 @@ class EstimateEntry < ActiveRecord::Base
 
   acts_as_customizable
 
-  default_scope :order => 'spent_on ASC'
+  default_scope {order('spent_on ASC')}
 
   validates_presence_of :user_id, :activity_id, :project_id, :hours, :spent_on
   validates_numericality_of :hours, :allow_nil => true, :message => :invalid
