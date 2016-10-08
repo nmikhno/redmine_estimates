@@ -21,10 +21,9 @@
 		  collection do
 		    get 'report'
         post 'new'
-		  end
-      
-      put :accept, on: :member
+      end
 
+      patch :accept, on: :member
 		end
 	end
 
