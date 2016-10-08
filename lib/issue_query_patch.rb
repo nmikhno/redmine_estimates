@@ -19,7 +19,7 @@ module IssueQueryPatch
   module InstanceMethods
 
     def initialize_available_filters_with_patch
-      p 'filter method patch '
+
       principals = []
       subprojects = []
       versions = []
