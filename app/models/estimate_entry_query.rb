@@ -106,10 +106,10 @@ class EstimateEntryQuery < Query
     order_option = [group_by_sort_order, options[:order]].flatten.reject(&:blank?)
 
     EstimateEntry.visible.
-      where(statement).
-      order(order_option).
-      joins(joins_for_order_statement(order_option.join(','))).
-      includes(:activity)
+        where(statement).
+        order(order_option).
+        joins(joins_for_order_statement(order_option.join(',')), :project).
+        includes(:activity)
   end
 
   def sql_for_activity_id_field(field, operator, value)
