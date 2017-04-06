@@ -1,0 +1,18 @@
+# Simplified Chinese strings go here for Rails i18n
+zh:
+  button_issue_estimate: "问题估算"
+  label_estimate_time: "估算工时总计"
+  label_estimate_accepted_time: "已确认工时总计"
+  label_estimates_actions: "估算确认"
+  label_estimated_time: "已估算工时"
+  label_issue_estimates: "当前问题的估算工时"
+  label_issues_estimates: "全部估算"
+  label_estimate: "估算"
+  button_accept: "确认"
+  button_cancel_estimate: "否决"
+  label_estimation_is_accepted: "确认"
+  link_show_accepted_estimates: "显示已确认的估算工时明细"
+  label_add_estimate: "添加估算"
+  estimate_entries: "估算"
+  field_total_estimate_hours: "估算工时"
+  field_total_accepted_estimate_hours: "已确认工时"
